@@ -550,3 +550,9 @@ function twentythirteen_customize_preview_js() {
 	wp_enqueue_script( 'twentythirteen-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20141120', true );
 }
 add_action( 'customize_preview_init', 'twentythirteen_customize_preview_js' );
+
+function istar2_page_menu_args( $args ) {
+	$args['show_home'] = 'I-STAR';
+	return $args;
+}
+add_filter( 'wp_page_menu_args', 'istar2_page_menu_args' );

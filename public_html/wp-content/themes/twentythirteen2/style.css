@@ -814,6 +814,15 @@ img.wp-smiley,
  * ----------------------------------------------------------------------------
  */
 
+ .fix {
+  top: 0px;
+  position: fixed;
+}
+
+.content-fix {
+  margin-top: 50px;
+}
+
 .site-header {
 	position: relative;
 }
@@ -950,8 +959,9 @@ ul.nav-menu .focus > ul,
 .navbar {
 	background-color: #f7f5e7;
 	margin: 0 auto;
-	max-width: 1600px;
+	max-width: 1598px;
 	width: 100%;
+	z-index: 9999;
 }
 
 .site-header .search-form {

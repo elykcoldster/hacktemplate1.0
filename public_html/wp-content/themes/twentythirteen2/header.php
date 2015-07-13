@@ -24,16 +24,48 @@
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+	<script type="text/javascript" src="wp-content/themes/twentythirteen2/js/jquery-1.9.1.min.js"></script>
 	<!--[if lt IE 9]>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
 	<![endif]-->
 	<?php wp_head(); ?>
 </head>
 
+<script>
+  $(function(){   
+    $(document).on( 'scroll', function(){
+      var h = document.getElementById('site-banner').clientHeight;
+      var barheight = document.getElementById('navbar').clientHeight;
+      console.log(document.getElementById('navbar').offsetLeft);
+      if ($(window).scrollTop() > h) {
+        document.getElementById('navbar')
+        	.setAttribute("style", "position:fixed; top: 0px");
+        document.getElementById('masthead')
+        	.setAttribute("style", "margin-top:" + barheight.toString() + "px");
+        $('.scroll-top-wrapper').addClass('show');
+      } else {
+        document.getElementById('navbar')
+        	.setAttribute("style", "position: \"\"; top: \"\"");
+        document.getElementById('masthead')
+        	.setAttribute("style", "margin-top: 0px");
+        $('.scroll-top-wrapper').removeClass('show');
+      }
+    });
+    $('.scroll-top-wrapper').on('click', scrollToTop);
+  });
+  function scrollToTop() {
+    verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+    element = $('body');
+    offset = element.offset();
+    offsetTop = offset.top;
+    $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
+  }
+</script>
+
 <body <?php body_class(); ?>>
 	<div id="page" class="hfeed site">
 		<header id="masthead" class="site-header" role="banner">
-			<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+			<a id="site-banner" class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 				<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
 				<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
 			</a>

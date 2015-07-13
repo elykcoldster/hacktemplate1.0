@@ -1,22 +1,16 @@
 /*
-Theme Name: Shape 2
-Theme URI: http://themeshaper.com/
-Author: ThemeShaper
-Author URI: http://themeshaper.com/
-Description: The Shape theme is a simple, minimalist theme based on Underscores and the original Shape Theme by Ian Stewart. It was created especially as a learning theme for The Theme Shaper WordPress Theme Tutorial: 2nd Edition.
-Version: 2.0
+Theme Name: Test Theme
+Theme URI: http://istar.jhu.edu/
+Author: Kyle Xiong
+Author URI: elykcoldster.github.io/
+Description: The Shape theme is a simple, minimalist theme based on Underscores and the original Shape Theme by Ian Stewart. It was created especially as a learning theme for The ThemeShaper WordPress Theme Tutorial: 2nd Edition.
+Version: 1.0
 License: GNU General Public License
 License URI: license.txt
-Tags: brown, green, light, tan, one-column, two-columns, left-sidebar, right-sidebar, flexible-width, custom-background, custom-header, custom-menu, featured-images, flexible-header, microformats, post-formats, rtl-language-support, threaded-comments, translation-ready
+Tags: light, white, one-column, two-columns, left-sidebar, right-sidebar, flexible-width, custom-backgroud, custom-header, custom-menu, featured-images, flexible-header, microformats, post-formats, rtl-language-support, threaded-comments, translation-ready
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
-
-Resetting and rebuilding styles have been helped along thanks to the fine work of
-Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
-along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
-and Blueprint http://www.blueprintcss.org/
 */
-
 
 /* =Reset
 -------------------------------------------------------------- */
@@ -93,56 +87,37 @@ a img {
 /* =Global
 ----------------------------------------------- */
 
+/* Set a default font size, color, line-height, and font family for your body element and all input elements. These can get overridden later on in the stylesheet, but are useful as base styles. */
+
 body,
 button,
 input,
 select,
 textarea {
-	color: #6b6252;	
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 16px;
-	font-size: 1.6rem;
-	line-height: 1.5;
-}
-
-body {
-	background: #e9e0d1;
+	
 }
 
 /* Headings */
 h1,h2,h3,h4,h5,h6 {
 	clear: both;
-	margin: 0.6em 0;
 }
 h1 {
-	font-size: 36px;
-	font-size: 3.6rem;
+	
 }
 h2 {
-	font-size: 28px;
-	font-size: 2.8rem;
+	
 }
 h3 {
-	font-size: 22px;
-	font-size: 2.2rem;
+	
 }
 h4 {
-	font-size: 16px;
-	font-size: 1.6rem;
+	
 }
 h5 {
-	font-size: 14px;
-	font-size: 1.4rem;
+	
 }
 h6 {
-	font-size: 12px;
-	font-size: 1.2rem;
-}
-hr {
-	background-color: #ccc;
-	border: 0;
-	height: 1px;
-	margin-bottom: 1.5em;
+	
 }
 
 /* Text elements */
@@ -182,7 +157,6 @@ address {
 	margin: 0 0 1.5em;
 }
 pre {
-	background: #dfd6c7;
 	font-family: "Courier 10 Pitch", Courier, monospace;
 	font-size: 15px;
 	font-size: 1.5rem;
@@ -233,6 +207,10 @@ table {
 th {
 	font-weight: bold;
 }
+hr {
+}
+
+/* Form Elements */
 button,
 input,
 select,
@@ -247,6 +225,8 @@ input {
 	line-height: normal; /* Addresses FF3/4 setting line-height using !important in the UA stylesheet */
 	*overflow: visible;  /* Corrects inner spacing displayed oddly in IE6/7 */
 }
+
+/* Gives a basic visual design to form elements */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -331,19 +311,16 @@ textarea {
 /* Links */
 a,
 a:visited {
-	color: #748a81;
-	text-decoration: none;
-	transition: all .3s ease-in-out;
-	-webkit-transition: all .3s ease-in-out;
-	-moz-transition: all .3s ease-in-out;
+	
 }
+
 a:hover,
 a:focus,
 a:active {
-	color: #33605a;
+	
 }
 
-/* Alignment */
+/* Alignment - WordPress uses these classes to align images and other elements inside the editor. */
 .alignleft {
 	display: inline;
 	float: left;
@@ -362,123 +339,105 @@ a:active {
 	margin: 1.5em auto;
 }
 
-/* Text meant only for screen readers */
+/* Text meant only for screen readers. It's hidden due to the clip property, but visible in the page source. If you take a look back in the template files at the mark-up for our main menu and other navigation areas, you'll notice that we have headers such as "Menu" and "Site Navigation" wrapped in an <code>h1</code> tag with a class of "assistive-text". Screen readers will read this text aloud, making it easier for users to locate structural sections in your theme.
+*/
 .assistive-text {
 	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
 	clip: rect(1px, 1px, 1px, 1px);
 	position: absolute !important;
 }
 
+/* If you want to give a common style to all of the titles in your theme, here's a place to do it (you can style them individually later) */
 .site-title,
 .entry-title,
 .page-title,
-.entry-content,
-.entry-summary,
 .widget-title,
 .comments-title,
-.comment .reply,
-.comment-meta,
-.comment-author,
 #reply-title {
-	font-family: Georgia, 'Times New Roman', serif;
+	
 }
 
 
 /* =Structure
 ----------------------------------------------- */
 
-#main,
-.main-navigation,
-.site-title,
-.site-description {
-    margin: 0 auto;
-	max-width: 1050px;
+/* Refer to the HTML structure graphic (http://themeshaper.com/wp-content/uploads/2012/10/html-visual.png) to see how these elements are nested in the mark-up. 
+
+Use this section to set widths and margins, and to build a layout. For examples of layouts that you can copy and paste into this section, see:
+https://github.com/Automattic/_s/blob/master/layouts/
+*/
+
+.site { /* The the outer-most container, wraps the entire site */
+		
 }
-#main {
-	clear: both;
-    overflow: hidden;
+.site-header { /* The container for the entire header area */
+	
 }
-#primary {
-	float: left;
-	margin: 0 -27% 0 0;
-	padding: 2em;
-	width: 90%;
+#main { /* The container for #primary, #secondary, and #tertiary */
+	
 }
-#content {
-	margin: 0 27% 0 0;
+#primary { /* The container for your primary content.*/
+
 }
-#secondary,
-#tertiary {
-	background: #ede8df;
-   	float: right;
-   	margin: 1em 1em 0;
-    padding: 2em 2em 0;
-    position: relative;
-    width: 20%;
+#content { /* The container for your post and page content. */
+
 }
-#tertiary {
-	padding-top: 0;
+#secondary { /* Container for your first widget area */
+
 }
-.site-footer {
-	clear: both;
-	width: 100%;
+#tertiary { /* Container for your second widget area */
+
 }
+.site-footer { /* Container for the entire site footer area */
+
+}
+
 
 /* =Site Header
 ----------------------------------------------- */
 
-.site-header hgroup {
-	background: #33605a;
-	padding: 1.5em 2em;
+/* Style elements inside of the .site-header container */
+
+.site-header hgroup { /* Container for site title and description */
+
 }
-.site-title {
-	font-size: 45px;
-	font-size: 4.5rem;
-	font-style: italic;
+.site-title,
+.site-title a {
+
 }
-.site-description {
-	font-size: 13px;
-	font-size: 1.3rem;	
+.site-description { /* This is the tagline */
+	
 }
-.site-title a,
-.site-description {
-	color: #e9e0d1;
-}
+
 
 /* =Menu
 ----------------------------------------------- */
 
-.main-navigation {
-    clear: both;
-    display: block;
-    padding: 1.5em;
+/* Style your navigation menu, which is inside .site-header. A basic drop-down menu structure is provided. */
+
+.main-navigation { /* wraps the entire navigation menu */
+	
 }
-.main-navigation:after {
+.main-navigation:after { /* Clears the floats after the menu */
 	clear: both;
 	content: "";
 	display: block;
 }
-.main-navigation ul {
+.main-navigation ul { /* The menu is an unordered list */
 	list-style: none;
 	margin: 0;
 	padding-left: 0;
 }
-.main-navigation li {
+.main-navigation li { /* Makes the menu "list" items horizontal */
 	float: left;
 	margin: 0.5em 0;
 	position: relative;
 }
-.main-navigation a {
-	color: #7c948a;
+.main-navigation a { /* The individual list item links */
     display: block;
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-right: 2em;
     text-decoration: none;
 }
-.main-navigation ul ul {
-	background: #e9e0d1;
-	border: 1px solid rgba( 0, 0, 0, 0.1 );
+.main-navigation ul ul { /* Submenu drop-down "box" */
 	display: none;
 	float: left;
 	position: absolute;
@@ -486,35 +445,32 @@ a:active {
 		left: 0;
 	z-index: 99999;
 }
-.main-navigation ul ul ul {
+.main-navigation ul ul ul { /* 3rd+ level drop-down "box" */
 	left: 100%;
 	top: 0;
 }
-.main-navigation ul ul a {
+.main-navigation ul ul li { /* List items inside the drop-down box */
+}
+.main-navigation ul ul a { /* Menu links inside the drop-down "box" */
 	padding: 0 1.5em;
 	width: 200px;
-}
-.main-navigation ul ul li {
 }
 .main-navigation li:hover > a,
 .main-navigation li.current_page_item a,
 .main-navigation li.current-menu-item a,
-.main-navigation ul ul a:hover {
-	color: #33605a;
+.main-navigation ul ul a:hover { /* Hover styles for menu items */
+
 }
 .main-navigation ul ul :hover > a {
+	
 }
 .main-navigation ul li:hover > ul {
 	display: block;
 }
 
-/* Small menu */
+/* Small menu toggle area for screens < 600 pixels wide. The small menu requires some simple JavaScript in order to take affect. See http://themeshaper.com/2012/10/31/the-wordpress-theme-header-template/ for instructions on setting up this script. */
 .menu-toggle {
-	color: #7c948a;
    	cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
 }
 .main-small-navigation .menu {
 	display: none;
@@ -524,53 +480,65 @@ a:active {
 /* =Content
 ----------------------------------------------- */
 
-.site-main {
-    background: #f1ece3;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-width: 3px 1px;
+/* Styles for posts and pages */
+.sticky { /* Style your sticky posts. This class is applied to the same element as .hentry below. */
+	
 }
-.sticky {
-}
-.hentry {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+.hentry { /* The wrapper for individual posts */
 	margin: 0 0 1.5em;
 	padding-bottom: 1.5em;
 }
-.entry-title,
-.page-title {
-	font-size: 28px;
-    font-size: 2.8rem;
-	font-style: italic;
-	margin: 0 0 0.2em;
+.entry-header { /* Container for the entry title, byline and post date */
+	
 }
-.entry-title a {
-	text-decoration: none;
+.entry-title, 
+.entry-title a { /* Post titles */
+
+}
+.page-title { /* Page titles */
+
 }
 body.search .page-title,
-body.archive .page-title {
-  	font-size: 16px;
-  	font-size: 1.6rem;
-    margin-bottom: 1em;
+body.archive .page-title { /* Optional, if you want your page titles to look different on search and archive pages */
+
 }
-.entry-meta {
+.entry-meta { /* Container for the entry metadata */
 	clear: both;
-	font-size: 12px;
-	font-size: 1.2rem;
 }
-.byline {
+.entry-date { 
+	
+}
+.byline { /* By default, bylines are hidden */
 	display: none;
 }
 .single .byline,
-.group-blog .byline {
+.group-blog .byline { /* Bylines are displayed on single posts and/or when there are multiple authors */
 	display: inline;
 }
+.cat-links {  /* Styles category links inside the entry meta */
+	
+}
+.tag-links { /* Styles links to tags inside the entry-meta */
+	
+}
+.sep {  /* Separator between category links, cat links, comments links, etc */
+	
+}
+.comments-link {  /* Link to leave a comment */
+	
+}
+.edit-link { /* Link to Edit the post (only shows up for admins)
+	
+}
 .entry-content,
-.entry-summary {
+.entry-summary { /* Container for the post body/excerpt text */
 	margin: 1.5em 0 0;
 }
+
+/* Styling In-Post Tables */
 .entry-content table,
 .comment-content table {
-	border: 1px solid #d9d9d9;
+	border: 1px solid #000;
 	border-left-width: 0;
 	margin: 0 -0.083em 2.083em 0;
 	text-align: left;
@@ -580,21 +548,22 @@ body.archive .page-title {
 .entry-content thead th,
 .comment-content tr th,
 .comment-content thead th {
-	border-left: 1px solid #d9d9d9;
+	border-left: 1px solid #000;
 	font-weight: bold;
 	padding: 0.5em 	1.25em;
 }
 .entry-content tr td,
 .comment-content tr td {
-	border: 1px solid #d9d9d9;
+	border: 1px solid #000;
   	border-width: 1px 0 0 1px;
 	padding: 0.5em 	1.25em;
 }
 .entry-content tr.odd td,
-.comment-content tr.odd td {
-	background: #dfd6c7;
+.comment-content tr.odd td { /* If you want to apply alternate styles to even/odd table rows */
+
 }
-.page-links {
+
+.page-links { /* Style the page numbers for multi-page posts (posts that have been split with <!--next-page -->. */
 	clear: both;
 	margin: 0 0 1.5em;
 }
@@ -603,8 +572,10 @@ body.archive .page-title {
 /* =Aside Post Format
 ----------------------------------------------- */
 
+/* Just put ".format-aside" before any of the above classes to create special formatting for Aside posts */
+
 .format-aside .entry-content {
-	border-left: 4px solid rgba( 0, 0, 0, 0.1 );
+	border-left: 4px solid #000;
 	padding-left: 1em;
 }
 
@@ -612,6 +583,7 @@ body.archive .page-title {
 /* =Media
 ----------------------------------------------- */
 
+/* Styling for images and videos */
 .site-header img,
 .entry-content img,
 .comment-content img,
@@ -634,23 +606,22 @@ img.size-full {
 	width: auto; /* Prevent stretching of full-size images with height and width attributes in IE8 */
 }
 .entry-content img.wp-smiley,
-.comment-content img.wp-smiley {
+.comment-content img.wp-smiley { /* Remove borders and backgrounds from WP smileys */
 	border: none;
 	margin-bottom: 0;
 	margin-top: 0;
 	padding: 0;
 }
-.wp-caption {
-	border: 1px solid #ccc;
+.wp-caption { /* The container for image captions */
 	max-width: 100%;
 }
 .wp-caption.aligncenter,
 .wp-caption.alignleft,
 .wp-caption.alignright,
-.wp-caption.alignnone {
+.wp-caption.alignnone { /* Add spacing around captions and post text */
 	margin-bottom: 1.5em;
 }
-.wp-caption img {
+.wp-caption img { /* The image inside the caption container */
 	display: block;
 	margin: 1.2% auto 0;
 	max-width: 98%;
@@ -661,13 +632,10 @@ img.size-full {
 .wp-caption .wp-caption-text {
 	margin: 0.8075em 0;
 }
-#content .gallery {
+#content .gallery { /* Container for image galleries */
 	margin-bottom: 1.5em;
 }
-.wp-caption-text,
 .gallery-caption {
-	font-size: 12px;
-	font-size: 1.2rem;
 	font-style: italic;
 }
 #content .gallery a img {
@@ -690,12 +658,10 @@ object {
 /* =Navigation
 ----------------------------------------------- */
 
+/* Older/Newer Post Navigation */
+
 .site-content .site-navigation {
-	font-size: 13px;
-	font-size: 1.3rem;
-	font-style: italic;
-	margin: 0 0 1.5em;
-	overflow: hidden;
+
 }
 .site-content .nav-previous {
 	float: left;
@@ -710,15 +676,15 @@ object {
 /* =Comments
 ----------------------------------------------- */
 
-#comments {
+#comments { /* Container for the comments section */
 	clear: both;
 }
-.bypostauthor {
+.bypostauthor { /* Gives post author comments thier own style */
+	
 }
 .comments-title,
 #reply-title {
-	font-size: 20px;
-	font-size: 2rem;
+
 }
 .commentlist li {
 	list-style: none;
@@ -728,56 +694,41 @@ object {
 	list-style: none;
 	margin: 0;
 }
-.children {
+.children { /* Nested comments */
 	margin: 0 0 0 6%;
 }
-.commentlist li.comment,
-.commentlist li.pingback {
-	border-bottom: 1px solid rgba( 0, 0, 0, 0.2 );
-	padding-left: 2.5em;
+.commentlist li.comment {  /* Individual top-level comments */
+
 }
-.commentlist .children li,
-.commentlist li:last-of-type {
-	border: none;
+.commentlist li.pingback {  /* Individual top-level pingbacks */
+
 }
-article.comment,
-li.pingback {
-	overflow: hidden;
-	padding: 2.5em 0 0.7em;
-    position: relative;
+.commentlist li:last-of-type { /* Do you want to style the last comment differently, such as remove borders? */
+
+}
+.commentlist .children li { /* Contains individual nested comments */
+
 }
 .children article.comment,
-.children li.pingback {
+.children li.pingback { /* Nexted comments and pingbacks */
 	padding-top: 1.0em;
 }
-.comment .avatar {
-	float: left;
-	margin-right: 1.25em;
+.comment .avatar { /* Comment author's gravatar image */
+
 }
-.comment-author {
-	font-size: 14px;
-	font-size: 1.4rem;
+.comment-author { /* Comment author's name */
+	
 }
-.comment-meta {
-	font-size: 12px;
-	font-size: 1.2rem;
+.comment-meta { /* Comment date, time, etc */
+
 }
-.comment-content{
-	font-size: 13px;
-	font-size: 1.3rem;
-	margin: 1em 0 0 4.5em;
+.comment-content { /* Actual comment text */
+
 }
-.comment .reply {
-	font-size: 12px;
-	font-size: 1.2rem;
+.comment .reply { /* The "Reply" link under each comment */
 	text-align: right;
 }
-li.pingback {
-	font-weight: bold;
-}
-li.pingback a {
-	font-weight: normal;
-}
+
 
 /* Comment Form */
 .comment-notes,
@@ -785,102 +736,178 @@ li.pingback a {
 p.nocomments,
 p.logged-in-as,
 #commentform label {
-	font-size: 13px;
-	font-size: 1.3rem;
+
 }
-.required {
+.required { /* The little asterisk next to a required comment field */
 	color: #880000;
 }
-#commentform label {
-	font-weight: bold;
+#commentform label { /* The text next to each comment form field */
 	padding: 1em 0;
 }
 #commentform input[type="text"] {
-	margin-left: 0.5em;
+
 }
-#commentform #comment {
-	margin-top: 0.6em;
+#commentform #comment { /* The comment form textarea */
+
 }
 #commentform .form-allowed-tags,
 #commentform .form-allowed-tags code {
-	font-size: 11px;
-	font-size: 1.1rem;
+
 }
-p.nocomments {
-	margin: 2.5em;
+p.nocomments { /* Message displayed when there are no comments */
+
 }
 
 
 /* =Widgets
 ----------------------------------------------- */
 
-.widget {
-	font-size: 12px;
-	font-size: 1.2rem;
-	line-height: 1.8;
+.widget-area { /* All of the sidebar container divs get this common class */
+	
+}
+.widget { /* The individual widget */
 	margin: 0 0 1.5em;
 }
 .widget-title {
-	color: #999;
-	font-size: 20px;
-	font-size: 2rem;
-	font-style: italic;
+
+}
+.widget ul { /* Unordered lists inside widgets */
+	list-style: none;
+	margin: 0;
+}
+.widget ul li { /* Unordered list items inside widgets */
+	margin-bottom: 0.25em;
 }
 
 /* Search widget */
 #searchsubmit {
 	display: none;
 }
+.widget_search #s {
+
+}
+
+/* Sub-Items in Menu & Categories Widgets. These classes are useful if you want to add special styling, such as indention, to sub-items in your menu and categories widgets. */
+.widget-area .sub-menu,
+.widget-area .children { 
+	margin-left:  1.5em;
+}
+.widget-area .sub-menu li,
+.widget-area .children li {
+
+}
+
+/* Text Widgets */
+.widget p,
+.textwidget {
+
+}
+.widget p a,
+.textwidget a {
+
+}
+
+/* Cloud Widgets */
+.wp_widget_tag_cloud div,
+.widget_tag_cloud div {
+	line-height: 1.5;
+	padding: 0.231em 0;
+}
+
+/* RSS Widget */
+.rsswidget img { /* This is the orange RSS icon to the left of the RSS widget title */
+	margin: 0;
+	vertical-align: text-top;
+}
+.rss-date {
+
+}
+.rssSummary {
+
+}
+
+/* Calendar Widget */
+#wp-calendar {
+	width: 100%;
+}
+#wp-calendar caption {
+	font-style: italic;
+}
+#wp-calendar thead th {
+	text-align: center;
+}
+#wp-calendar tbody,
+#wp-calendar tbody td {
+	border: 1px solid #000;
+}
+#wp-calendar tbody {
+	border-left-width: 0;
+}
+#wp-calendar tbody td {
+  	border-width: 1px 0 0 0;
+}
+#wp-calendar tbody td a {
+	font-weight: bold;
+}
+#wp-calendar tbody td:hover {
+
+}
+#wp-calendar tfoot #next {
+	text-align: right;
+}
+#wp-calendar #today {
+	font-weight: bold;
+}
+#wp-calendar #prev,
+#wp-calendar #next {
+
+}
+#wp-calendar tbody .pad {
+
+}
 
 
 /* =Site Footer
 ----------------------------------------------- */
 
+.site-footer {
+
+}
 .site-info {
-	font-size: 13px;
-	font-size: 1.3rem;
-	padding: 1.5em 0;
-	text-align: center;
+
 }
 
 
 /* =Responsive Structures
 ----------------------------------------------- */
 
-@media only screen and (max-width: 800px) {
-
-	#main {
-		overflow: visible;
-	}
+@media only screen and (max-width: 768px) {
 	#content,
 	#primary,
 	#secondary,
-	#tertiary {
-		background: none;
+	#tertiary { /* Remove floats on all structural elements for smaller screens */
 		float: none;
 		margin: 0;
 		padding: 0;
 	}
 	#primary,
 	#secondary,
-	#tertiary {
+	#tertiary { /* Make all structural elements full-width */
 		width: 100%;
 	}
-	.site-header hgroup,
-	#main {
-		padding: 0.8em;
-	}
 }
 
 
-/* =IE Styles
+/* =IE Styling
 ----------------------------------------------- */
 
-#ie8 .site-header img,
-#ie8 .entry-content img,
-#ie8 img.size-full,
-#ie8 .entry-thumbnail img,
-#ie8 .widget img,
-#ie8 .wp-caption img {
-	width: auto; /* Prevent stretching of full-size images with height and width attributes in IE8 */
+/* If you have any IE-specific adjustments to make, add them here. 
+
+For example: 
+
+#ie8 body {
+	color #333;
 }
+
+Will make the sbody text #333 on IE8 only. In order for this to work, you need to set up conditionals to add an ID-selector to the HTML element when IE is detected. For instructions on how to set up the conditionals, see: http://themeshaper.com/2012/10/31/the-wordpress-theme-header-template/
+*/
