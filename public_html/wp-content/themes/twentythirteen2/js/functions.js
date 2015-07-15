@@ -4,6 +4,13 @@
  * Provides helper functions to enhance the theme experience.
  */
 
+function scrollToTop() {
+  verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+  element = $('body');
+  offset = element.offset();
+  offsetTop = offset.top;
+  $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
+}
 ( function( $ ) {
 	var body    = $( 'body' ),
 	    _window = $( window ),
@@ -12,6 +19,13 @@
 	nav = $( '#site-navigation' );
 	button = nav.find( '.menu-toggle' );
 	menu = nav.find( '.nav-menu' );
+
+	$("a[href^=#]").click(function(e) {
+	  var dest = $(this).attr('href');
+	  var navbarh = document.getElementById ('navbar').clientHeight;
+	  e.preventDefault();
+	  $('html,body').animate({ scrollTop: $(dest).offset().top - 2*navbarh}, 'slow');
+	});
 
 	/**
 	 * Adds a top margin to the footer if the sidebar widget area is higher

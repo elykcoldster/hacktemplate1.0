@@ -957,6 +957,7 @@ ul.nav-menu .focus > ul,
 
 /* Navbar */
 .navbar {
+	position: relative;
 	background-color: #f7f5e7;
 	margin: 0 auto;
 	max-width: 1598px;
@@ -1001,6 +1002,10 @@ ul.nav-menu .focus > ul,
  * ----------------------------------------------------------------------------
  */
 
+.bgc {
+	background-color:#ffffef;
+}
+
 .hentry {
 	padding: 40px 0;
 }
@@ -1010,8 +1015,9 @@ ul.nav-menu .focus > ul,
 .entry-summary,
 .entry-meta {
 	margin: 0 auto;
-	max-width: 604px;
+	max-width: 1080px;
 	width: 100%;
+	padding: 0 50px;
 }
 
 .sidebar .entry-header,

@@ -169,6 +169,12 @@ function twentythirteen_scripts_styles() {
 	if ( is_active_sidebar( 'sidebar-1' ) )
 		wp_enqueue_script( 'jquery-masonry' );
 
+	// Add jQuery
+	wp_enqueue_script( 'jquery' );
+
+	wp_enqueue_script( 'jquery-1.9.1', site_url() . '/wp-includes/js/jquery-1.9.1.min.js' );
+	wp_enqueue_script( 'owl-carousel-js', site_url() . '/wp-includes/js/owl-carousel/owl.carousel.min.js' );
+
 	// Loads JavaScript file with functionality specific to Twenty Thirteen.
 	wp_enqueue_script( 'twentythirteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20150330', true );
 
@@ -183,6 +189,10 @@ function twentythirteen_scripts_styles() {
 
 	// Loads the Internet Explorer specific stylesheet.
 	wp_enqueue_style( 'twentythirteen-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentythirteen-style' ), '2013-07-18' );
+	wp_enqueue_style( 'istar-style', get_template_directory_uri() . '/css/istarstyle.css', false, '2015-07-14' );
+	wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/css/owl.carousel.css', false, '2015-07-14' );
+	wp_enqueue_style( 'owl-demo', get_template_directory_uri() . '/css/owl.demo.css', array( 'owl-carousel' ), '2015-07-14' );
+	wp_enqueue_style( 'owl-theme', get_template_directory_uri() . '/css/owl.theme.css', array( 'owl-carousel' ), '2015-07-14' );
 	wp_style_add_data( 'twentythirteen-ie', 'conditional', 'lt IE 9' );
 }
 add_action( 'wp_enqueue_scripts', 'twentythirteen_scripts_styles' );
@@ -556,3 +566,123 @@ function istar2_page_menu_args( $args ) {
 	return $args;
 }
 add_filter( 'wp_page_menu_args', 'istar2_page_menu_args' );
+
+function fixed_menu_scroll() { ?>
+	<?php if (is_admin_bar_showing()) : ?>
+	<script type="text/javascript">
+		var adminbar = true;
+	</script>
+	<?php else : ?>
+	<script type="text/javascript">
+		var adminbar = false;
+	</script>
+	<?php endif; ?>
+	<script type="text/javascript">
+		(function($){   
+		  $(document).on( 'scroll', function(){
+		    var h = document.getElementById('site-banner').clientHeight;
+		    var barheight = document.getElementById('navbar').clientHeight;
+		    var navbar = document.getElementById('navbar');
+		    if ($(window).scrollTop() > h) {
+		      if (adminbar) {
+		        navbar.setAttribute("style", "position:fixed; top: 32px");
+		      } else {
+		      	navbar.setAttribute("style", "position:fixed; top: 0px");
+		      }
+		      document.getElementById('masthead')
+		      	.setAttribute("style", "margin-top:" + barheight.toString() + "px");
+		      $('.scroll-top-wrapper').addClass('show');
+		    } else {
+		      document.getElementById('navbar')
+		      	.setAttribute("style", "position: \"\"; top: \"\"");
+		      document.getElementById('masthead')
+		      	.setAttribute("style", "margin-top: 0px");
+		      $('.scroll-top-wrapper').removeClass('show');
+		    }
+		  });
+		  $('.scroll-top-wrapper').on('click', scrollToTop);
+		}) (jQuery);
+		function scrollToTop() {
+		  verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+		  element = $('body');
+		  offset = element.offset();
+		  offsetTop = offset.top;
+		  $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
+		}
+	</script>
+<?php
+}
+
+add_action( 'wp_footer', 'fixed_menu_scroll' );?>
+
+<?php function owl_carousel_setup() { ?>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	  $("#owl-demo").owlCarousel({
+	    autoPlay: 3500,
+	    navigation : true,
+	    slideSpeed : 300,
+	    paginationSpeed : 400,
+	    singleItem : true,
+	    loop: true,
+	    stopOnHover: true,
+	    mouseDrag: false,
+	    touchDrag: false
+	  });
+	});
+	</script>
+<?php
+}?>
+
+<?php add_action( 'wp_footer', 'owl_carousel_setup' );?>
+
+<?php function construct_owl_carousel($indices, $page_link = "") { ?>
+	<!-- Carousel -->
+	<div class="container">
+	<div id="owl-demo" class="owl-carousel owl-theme">
+		<?php foreach ($indices as $index) {
+	  		echo '<div class="item"><div class="textoverlay">';
+	  		echo '<a href="' . $page_link . '#post-' . $index .'">';
+	  		echo get_post($index)->post_title . '</a></div>';
+	  		echo '<a href="' . $page_link . '#post-' . $index .'">';
+	  		$feat_image = wp_get_attachment_url( get_post_thumbnail_id($index) );
+	  		echo '<img src="' . $feat_image . '"></a>';
+	  		echo '</div>';
+	 	}?>
+	</div>
+	</div>
+	<!-- Carousel -->
+<?php
+}?>
+
+<?php function get_post_ids($posts, $ignore) {
+	foreach ($posts as $post) {
+		if ($post->post_name != $ignore) {
+			$id[] = $post->ID;
+		}
+	}
+	return $id;
+}?>
+
+<?php function group_query($args) {
+	$args['post_parent'] = get_the_ID();
+	$query = new WP_Query( $args );
+	if ($query->have_posts()) {
+		while ($query->have_posts()) {
+			$query->the_post();
+			process_people_page_post(get_post());
+			group_query($args);
+		}
+	}
+} ?>
+
+<?php function process_people_page_post($post) {
+	$people_type = strtolower(get_post_meta($post->ID, 'people-type', true));
+	switch ($people_type) {
+		case 'group':
+		echo '<div class="people"><div class="title" id="title-' . $post->ID .'"><h2>' . get_post()->post_title . '</h2></div></div>'; break;
+		case 'person':
+		echo '<div class="people"><div class="person" id="person-' . $post->ID .'"><h3>' . get_post()->post_title . '</h3></div></div>'; break;
+		default: break;
+	}
+} ?>

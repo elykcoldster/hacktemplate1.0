@@ -38,6 +38,7 @@ get_header(); ?>
 					<footer class="entry-meta">
 						<?php edit_post_link( __( 'Edit', 'twentythirteen' ), '<span class="edit-link">', '</span>' ); ?>
 					</footer><!-- .entry-meta -->
+					
 				</article><!-- #post -->
 
 				<?php comments_template(); ?>
