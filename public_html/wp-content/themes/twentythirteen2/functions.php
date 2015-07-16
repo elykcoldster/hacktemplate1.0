@@ -664,25 +664,45 @@ add_action( 'wp_footer', 'fixed_menu_scroll' );?>
 	return $id;
 }?>
 
-<?php function group_query($args) {
+<?php function group_query($args, &$gc) {
 	$args['post_parent'] = get_the_ID();
 	$query = new WP_Query( $args );
 	if ($query->have_posts()) {
 		while ($query->have_posts()) {
 			$query->the_post();
-			process_people_page_post(get_post());
-			group_query($args);
+			process_people_page_post(get_post(), $gc);
+			group_query($args, $gc);
 		}
 	}
 } ?>
 
-<?php function process_people_page_post($post) {
+<?php function process_people_page_post($post, &$gc) {
 	$people_type = strtolower(get_post_meta($post->ID, 'people-type', true));
-	switch ($people_type) {
+	switch ($people_type) :
 		case 'group':
-		echo '<div class="people"><div class="title" id="title-' . $post->ID .'"><h2>' . get_post()->post_title . '</h2></div></div>'; break;
+		if ($gc > 0)
+			echo '</ul></div>';
+		echo '<div class="people"><div class="title" id="title-' . $post->ID .'"><h2>' . get_post()->post_title . '</h2></div><ul>';
+		$gc++;
+		break;
 		case 'person':
-		echo '<div class="people"><div class="person" id="person-' . $post->ID .'"><h3>' . get_post()->post_title . '</h3></div></div>'; break;
+		echo '<li class="person" id="person-' . $post->ID .'">';
+		generate_person_block($post);
+		echo '</h3></li>';
+		break;
 		default: break;
-	}
+	endswitch;
+} ?>
+
+<?php function generate_person_block($post) { ?>
+	<?php
+	$feat_image = wp_get_attachment_url( get_post_thumbnail_id($index));
+	?>
+	<div class="person-block" style="background-image: url('<?php echo $feat_image ?>')">	
+		<div class="blurred-edges"></div>
+	</div>
+	<div class="person-title">
+		<h3><?php echo $post->post_title ?></h3>
+	</div>
+<?php
 } ?>

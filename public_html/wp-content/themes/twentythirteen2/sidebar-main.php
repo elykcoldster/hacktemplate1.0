@@ -7,7 +7,7 @@
  * @package WordPress
  * @subpackage Twenty_Thirteen
  * @since Twenty Thirteen 1.0
- */
+ */ 
 
 if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
 	<div id="secondary" class="sidebar-container" role="complementary">
