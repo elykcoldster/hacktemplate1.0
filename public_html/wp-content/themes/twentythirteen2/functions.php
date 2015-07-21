@@ -173,6 +173,7 @@ function twentythirteen_scripts_styles() {
 	wp_enqueue_script( 'jquery' );
 
 	wp_enqueue_script( 'jquery-1.9.1', site_url() . '/wp-includes/js/jquery-1.9.1.min.js' );
+	wp_enqueue_script( 'jquery-ui-1.11.4', site_url() . '/wp-includes/js/jquery-ui.min.js' );
 	wp_enqueue_script( 'owl-carousel-js', site_url() . '/wp-includes/js/owl-carousel/owl.carousel.min.js' );
 
 	// Loads JavaScript file with functionality specific to Twenty Thirteen.
@@ -583,32 +584,32 @@ function fixed_menu_scroll() { ?>
 		    var h = document.getElementById('site-banner').clientHeight;
 		    var barheight = document.getElementById('navbar').clientHeight;
 		    var navbar = document.getElementById('navbar');
+		    var masthead = document.getElementById('masthead');
 		    if ($(window).scrollTop() > h) {
+		    	/* if admin bar exists (logged in) */
 		      if (adminbar) {
-		        navbar.setAttribute("style", "position:fixed; top: 32px");
+		        navbar.style.position = "fixed";
+		        navbar.style.top = "32px";
 		      } else {
-		      	navbar.setAttribute("style", "position:fixed; top: 0px");
+		      	navbar.style.position = "fixed";
+		        navbar.style.top = "0px";
 		      }
-		      document.getElementById('masthead')
-		      	.setAttribute("style", "margin-top:" + barheight.toString() + "px");
-		      $('.scroll-top-wrapper').addClass('show');
+		      /* shift white span */
+		      if (document.getElementById('whole-page-span')) {
+			      document.getElementById('whole-page-span').style.marginTop = "-" + barheight.toString() + "px";
+		      }
+		      /* shift banner */
+		      masthead.style.marginTop = barheight.toString() + "px";
 		    } else {
-		      document.getElementById('navbar')
-		      	.setAttribute("style", "position: \"\"; top: \"\"");
-		      document.getElementById('masthead')
-		      	.setAttribute("style", "margin-top: 0px");
-		      $('.scroll-top-wrapper').removeClass('show');
+		      navbar.style.position = "relative";
+		      navbar.style.top = "";
+		      masthead.style.marginTop = "0px";
+		      if (document.getElementById('whole-page-span')) {
+			      document.getElementById('whole-page-span').style.marginTop = "0px";
+		      }
 		    }
 		  });
-		  $('.scroll-top-wrapper').on('click', scrollToTop);
 		}) (jQuery);
-		function scrollToTop() {
-		  verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
-		  element = $('body');
-		  offset = element.offset();
-		  offsetTop = offset.top;
-		  $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
-		}
 	</script>
 <?php
 }
@@ -698,11 +699,43 @@ add_action( 'wp_footer', 'fixed_menu_scroll' );?>
 	<?php
 	$feat_image = wp_get_attachment_url( get_post_thumbnail_id($index));
 	?>
-	<div class="person-block" style="background-image: url('<?php echo $feat_image ?>')">	
-		<div class="blurred-edges"></div>
-	</div>
+	<a class="person-link" id="person-link-<?php echo $post->ID; ?>" href="#person-<?php echo $post->ID; ?>"
+		onClick="toggle_popup(<?php echo $post->ID?>); return false;">
+		<div class="person-block" style="background-image: url('<?php echo $feat_image ?>')">
+			<div class="blurred-edges"></div>
+		</div>
+	</a>
 	<div class="person-title">
 		<h3><?php echo $post->post_title ?></h3>
 	</div>
+	<?php get_person_popup($post); ?>
 <?php
 } ?>
+
+<?php function get_person_popup($post) { ?>
+	<?php $picture = wp_get_attachment_url( get_post_thumbnail_id($postid) ); ?>
+	<div class="person-popup" id="person-popup-<?php echo $post->ID ?>">
+		<div class="popup-image"><img src="<?php echo $picture; ?>"></div>
+		<div class="popup-info"><?php echo get_post_info($post->ID); ?></div>
+		<div class="popup-content"><?php echo $post->post_content; ?></div>
+		<div class="popup-close"><a href="#person_popup_close" onClick="close_popup(); return false;">Close</a></div>
+	</div>
+<?php
+}?>
+
+<?php function get_post_info($postid) {
+	$title = get_post_meta($postid, 'title', true);
+	$address = get_post_meta($postid, 'address', true);
+	$phone = get_post_meta($postid, 'phone', true);
+	$email = get_post_meta($postid, 'email', true);
+	?>
+	<div class="popup-title"><?php echo nl2br($title); ?></div>
+	<div class="popup-address"><?php echo nl2br($address); ?></div>
+	<?php if ($phone): ?>
+	<div class="popup-phone">Phone: <?php echo $phone; ?></div>
+	<?php endif; ?>
+	<?php if ($email): ?>
+	<div class="popup-email">Email: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></div>
+	<?php endif; ?>
+<?php
+}?>

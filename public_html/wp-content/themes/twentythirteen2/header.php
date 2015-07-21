@@ -30,6 +30,10 @@
 	<?php wp_head(); ?>
 </head>
 
+<!-- Whole page span of white to hide loading objects from view until page is finished loading,
+addressed in the functions.js file. -->
+<span id="whole-page-span"></span>
+
 <body <?php body_class(); ?>>
 	<div id="page" class="hfeed site">
 		<header id="masthead" class="site-header" role="banner">
@@ -50,5 +54,10 @@
 				</nav><!-- #site-navigation -->
 			</div><!-- #navbar -->
 		</header><!-- #masthead -->
-
+		<div class="scroll-top-wrapper ">
+		  <span class="scroll-top-inner">
+		    <!--<i class="fa fa-2x fa-arrow-circle-up"></i>-->
+		    <?php echo '<img src="' . get_template_directory_uri() . '/images/totop.png">';?>
+		  </span>
+		</div>
 		<div id="main" class="site-main">

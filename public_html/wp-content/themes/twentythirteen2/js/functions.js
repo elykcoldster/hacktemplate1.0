@@ -4,13 +4,6 @@
  * Provides helper functions to enhance the theme experience.
  */
 
-function scrollToTop() {
-  verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
-  element = $('body');
-  offset = element.offset();
-  offsetTop = offset.top;
-  $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
-}
 ( function( $ ) {
 	var body    = $( 'body' ),
 	    _window = $( window ),
@@ -19,12 +12,72 @@ function scrollToTop() {
 	nav = $( '#site-navigation' );
 	button = nav.find( '.menu-toggle' );
 	menu = nav.find( '.nav-menu' );
+	/*----------------------------------------------*/
+	$(document).ready(function(){
+		/*$(".person-block").mouseenter(function(){
+			var person = document.getElementById(this.id);
+			$(this).effect("bounce", { distance: 10, times: 1 }, 150);
+		});*/
+		//$('#whole-page-span').hide();
+		console.log('loaded');
+
+		document.getElementById("whole-page-span").style.visibility = "hidden";
+
+		$(".person-link").click(function(){
+
+		});
+	});
+
+	$(document).on( 'scroll', function(){
+      var h = document.getElementById('masthead').clientHeight;
+      if ($(window).scrollTop() > h) {
+        $('.scroll-top-wrapper').addClass('show');
+      } else {
+        $('.scroll-top-wrapper').removeClass('show');
+      }
+    });
+
+	$(document).on('keydown', function(e) {
+		if (e.keyCode === 27) { // escape = 27
+			close_popup();
+		}
+	});
+
+    $('.scroll-top-wrapper').on('click', scrollToTop);
+
+	$(document).mouseup(function(e) {
+		var container = $(".person-popup");
+		if (!container.is(e.target) && container.has(e.target).length === 0) {
+			close_popup();
+		}
+	});
 
 	$("a[href^=#]").click(function(e) {
 	  var dest = $(this).attr('href');
-	  var navbarh = document.getElementById ('navbar').clientHeight;
-	  e.preventDefault();
-	  $('html,body').animate({ scrollTop: $(dest).offset().top - 2*navbarh}, 'slow');
+	  if (!dest.includes("person")) {
+		  var navbarh = document.getElementById ('navbar').clientHeight;
+		  e.preventDefault();
+		  $('html,body').stop().animate({ scrollTop: $(dest).offset().top - 2*navbarh}, 'slow');
+	  }
+	});
+	$(document).mousemove(function(e) {
+		if (document.getElementById("istar-sidebar")) {
+			mouseX = e.pageX;
+			var winwidth = $(window).width();
+			var sbWidth = $(".istar-sidebar:first").width();
+			var sbShift = (winwidth - sbWidth).toString();
+			if (mouseX > winwidth * 0.95) {
+				document.getElementById("istar-sidebar").style.left = sbShift + "px";
+			} else if (mouseX < winwidth * 0.90) {
+				document.getElementById("istar-sidebar").style.left = "100%";
+			}
+		}
+	});
+
+	$(window).on('resize', function(e) {
+		if (document.getElementById("istar-sidebar")) {
+			document.getElementById("istar-sidebar").style.left = "100%";
+		}
 	});
 
 	/**
@@ -105,7 +158,14 @@ function scrollToTop() {
 			button.removeAttr( 'aria-controls' );
 		}
 	}
-
+	function scrollToTop() {
+	  verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+	  element = $('body');
+	  offset = element.offset();
+	  offsetTop = offset.top;
+	  
+	  $('html, body').stop().animate({scrollTop: 0}, 300);
+	}
 	_window
 		.on( 'load.twentythirteen', onResizeARIA )
 		.on( 'resize.twentythirteen', function() {
@@ -144,3 +204,34 @@ function scrollToTop() {
 		} );
 	}
 } )( jQuery );
+
+function toggle_popup(post_id) {
+	var person = document.getElementById("person-link-" + post_id);
+	var popup = document.getElementById("person-popup-" + post_id);
+	var isVisible = popup.style.display;
+	if (isVisible == "none") {
+		$(".person-popup").hide();
+		blur_everything();
+		$("#person-popup-" + post_id).fadeIn(300);
+	} else {
+		close_popup();
+	}
+} (jQuery);
+
+/* Called when clicked outside of DIV or when 'Close' button is clicked. */
+function close_popup() {
+	$(".person-popup").fadeOut(300);
+	remove_blur();
+}
+
+function blur_everything() {
+	// currently only being called in people class, might have to parameterize if other pages require
+	$("#people-header").addClass("blur");
+	$(".person-block").addClass("blur");
+	$(".person-title").addClass("blur");
+	$(".title").addClass("blur");
+}
+
+function remove_blur() {
+	$(".blur").removeClass("blur");
+}

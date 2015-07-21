@@ -2,7 +2,7 @@
 	$i = 0;
 	foreach ($posts as $post) { ?>
 		<?php $id = $post->ID; ?>
-		<?php echo '<div id="post-' . $id . '">';?>
+		<?php echo '<div class="istar-panel" id="post-' . $id . '">';?>
 			<?php if ($post-> post_title == 'Research') : ?>
 				<?php echo '<h1 class="title"><div class = "large">' . $post -> post_title . '</div></h1>'; ?>
 			<?php else : ?>

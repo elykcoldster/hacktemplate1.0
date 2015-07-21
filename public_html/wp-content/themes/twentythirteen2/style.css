@@ -108,7 +108,7 @@ textarea {
 
 body {
 	color: #141412;
-	line-height: 1.5;
+	line-height: 1.65;
 	margin: 0;
 }
 
@@ -153,7 +153,7 @@ h1 {
 
 h2 {
 	font-size: 30px;
-	margin: 25px 0;
+	margin: 0px 0;
 }
 
 h3 {
@@ -793,14 +793,14 @@ img.wp-smiley,
 .site-main .sidebar-container {
 	height: 0;
 	position: absolute;
-	top: 40px;
+	top: 0px;
 	width: 100%;
 	z-index: 1;
 }
 
 .site-main .sidebar-inner {
 	margin: 0 auto;
-	max-width: 1040px;
+	
 }
 
 
@@ -905,7 +905,7 @@ div.nav-menu > ul {
 	padding: 0;
 	position: absolute;
 	left: -2px;
-	z-index: 99999;
+	z-index: 9998;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
@@ -962,12 +962,12 @@ ul.nav-menu .focus > ul,
 	margin: 0 auto;
 	max-width: 1598px;
 	width: 100%;
-	z-index: 9999;
+	z-index: 9998;
 }
 
 .site-header .search-form {
 	position: absolute;
-	right: 20px;
+	right: 0px;
 	top: 1px;
 }
 
@@ -1002,11 +1002,12 @@ ul.nav-menu .focus > ul,
  * ----------------------------------------------------------------------------
  */
 .bgc {
-	background-color:#ffffef;
+	background-color:#f2f2f2;
+	border-radius: 10px;
 }
 
 .hentry {
-	padding: 40px 0;
+	padding: 0px 0;
 }
 
 .entry-header,
